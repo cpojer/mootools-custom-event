@@ -61,10 +61,8 @@ Element.defineCustomEvent = function(name, custom){
 		base: base.base,
 
 		condition: function(event){
-			if (base.condition && !base.condition.call(this, event)) return false;
-			if (custom.condition && !custom.condition.call(this, event)) return false;
-
-			return true;
+			return (!base.condition || base.condition.call(this, event)) &&
+					(!custom.condition || custom.condition.call(this, event));
 		},
 
 		onAdd: inherit(custom, base, 'onAdd', name),
