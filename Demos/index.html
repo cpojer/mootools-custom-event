@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Custom-Event for MooTools</title>
+	<link rel="stylesheet" media="all" type="text/css" href="style.css" />
+	
+	<script type="text/javascript" src="mootools-core.js"></script>
+	
+	<script type="text/javascript" src="../Source/Element.defineCustomEvent.js"></script>
+	
+	<script type="text/javascript">
+		
+		Element.defineCustomEvent('meta', {
+
+			base: 'keydown',
+
+			condition: function(event){
+				return !!event.meta;
+			},
+
+			onAddFirst: function(fn, name){
+				console.log('addfirst: ' + name);
+			},
+
+			onRemoveLast: function(fn, name){
+				console.log('removelast: ' + name);
+			}
+
+		});
+
+
+		Element.defineCustomEvent('meta+control', {
+
+			base: 'meta',
+
+			condition: function(event){
+				return !!event.control;
+			},
+
+			onAddFirst: function(fn, name){
+				console.log('-addfirst: ' + name);
+			}
+
+		});
+		
+		var name = 'meta+control';
+		var empty = function(){};
+		var calls = 0, listener = function(){
+			console.log('fired ' + name);
+			
+			if (++calls == 5){
+				document.removeEvent(name, listener);
+				(function(){
+					document.removeEvent(name, empty);
+				}).delay(1000);
+			}
+		};
+		
+		document.addEvent(name, empty);
+		document.addEvent(name, listener);
+
+		Element.defineCustomEvent('meta+control+shift', {
+
+			base: 'meta+control',
+
+			condition: function(event){
+				return !!event.shift;
+			},
+
+			onAdd: function(fn, name){
+				console.log('+adding ' + name);
+			},
+
+			onAddFirst: function(fn, name){
+				console.log('+addfirst ' + name);
+			}
+
+		});
+		
+		var subName = 'meta+control+shift';
+		document.addEvent(subName, function(){
+			console.log('+firing ' + subName);
+		});
+
+		Element.defineCustomEvent('shift', {
+
+			base: 'keydown',
+			
+			condition: function(event){
+				return !!event.shift;
+			},
+			
+			onAdd: function(fn, name){
+				console.log('~adding ' + name);
+			}
+
+		});
+
+		document.addEvent('shift', function(){
+			console.log('~firing: shift');
+		});
+		
+	</script>
+</head>
+<body>
+<div>
+	Test.
+</div>
+</body>
+</html>
