@@ -20,7 +20,7 @@ provides: Element.defineCustomEvent
 
 [Element, Window, Document].invoke('implement', {hasEvent: function(event){
 	var events = this.retrieve('events');
-	return (events && events[event] && events[event].values.length);
+	return !!(events && events[event] && events[event].values.length);
 }});
 
 var wrap = function(custom, method, extended, name){
