@@ -18,21 +18,21 @@ provides: Element.defineCustomEvent
 
 (function(){
 
+[Element, Window, Document].invoke('implement', {hasEvent: function(event){
+	var events = this.retrieve('events');
+	return (events && events[event] && events[event].values.length);
+}});
+
 var events = Element.Events;
 
-var eventsOf = function(element, event){
-	var events = element.retrieve('events');
-	return (events && events[event] && events[event].keys.length) || 0;
-};
-
-var wrap = function(custom, method, extended, name, amount){
+var wrap = function(custom, method, extended, name){
 	method = custom[method];
 	extended = custom[extended];
 
 	return function(fn, customName){
 		if (!customName) customName = name;
 		
-		if (extended && eventsOf(this, customName) == amount) extended.call(this, fn, customName);
+		if (extended && !this.hasEvent(customName)) extended.call(this, fn, customName);
 		if (method) method.call(this, fn, customName);
 	};
 };
@@ -48,8 +48,8 @@ Element.defineCustomEvent = function(name, custom){
 
 	var base = events[custom.base];
 
-	custom.onAdd = wrap(custom, 'onAdd', 'onSetup', name, 1);
-	custom.onRemove = wrap(custom, 'onRemove', 'onTeardown', name, 0);
+	custom.onAdd = wrap(custom, 'onAdd', 'onSetup', name);
+	custom.onRemove = wrap(custom, 'onRemove', 'onTeardown', name);
 
 	if (!base){
 		events[name] = custom;
