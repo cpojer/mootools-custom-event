@@ -60,9 +60,9 @@ Element.defineCustomEvent = function(name, custom){
 
 		base: base.base,
 
-		condition: function(event, customName){
-			if (base.condition && !base.condition.call(this, event, customName || name)) return false;
-			if (custom.condition && !custom.condition.call(this, event, customName || name)) return false;
+		condition: function(event){
+			if (base.condition && !base.condition.call(this, event)) return false;
+			if (custom.condition && !custom.condition.call(this, event)) return false;
 
 			return true;
 		},
