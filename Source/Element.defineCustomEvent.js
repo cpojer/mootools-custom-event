@@ -48,8 +48,8 @@ Element.defineCustomEvent = function(name, custom){
 
 	var base = events[custom.base];
 
-	custom.onAdd = wrap(custom, 'onAdd', 'onAddFirst', name, 1);
-	custom.onRemove = wrap(custom, 'onRemove', 'onRemoveLast', name, 0);
+	custom.onAdd = wrap(custom, 'onAdd', 'onSetup', name, 1);
+	custom.onRemove = wrap(custom, 'onRemove', 'onTeardown', name, 0);
 
 	if (!base){
 		events[name] = custom;

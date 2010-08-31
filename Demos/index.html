@@ -18,12 +18,12 @@
 				return !!event.meta;
 			},
 
-			onAddFirst: function(fn, name){
-				console.log('addfirst: ' + name);
+			onSetup: function(fn, name){
+				console.log('setup: ' + name);
 			},
 
-			onRemoveLast: function(fn, name){
-				console.log('removelast: ' + name);
+			onTeardown: function(fn, name){
+				console.log('teardown: ' + name);
 			}
 
 		});
@@ -37,8 +37,8 @@
 				return !!event.control;
 			},
 
-			onAddFirst: function(fn, name){
-				console.log('-addfirst: ' + name);
+			onSetup: function(fn, name){
+				console.log('-setup: ' + name);
 			}
 
 		});
@@ -71,7 +71,7 @@
 				console.log('+adding ' + name);
 			},
 
-			onAddFirst: function(fn, name){
+			onSetup: function(fn, name){
 				console.log('+addfirst ' + name);
 			}
 
