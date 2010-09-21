@@ -43,11 +43,13 @@
 				console.log('-setup: ' + name);
 			},
 
-			onEnable: function(){console.log('yo');
+			onEnable: function(){
+				console.log('enabling control+alt');
 				isEnabled = true;
 			},
 
 			onDisable: function(){
+				console.log('disabling control+alt');
 				isEnabled = false;
 			}
 
