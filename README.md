@@ -99,12 +99,23 @@ To enable them again you can use
 
 	Element.enableCustomEvents();
 
-There is a 'cancelable'-flag that you can set on custom events to make it possible to disable them:
+There are onEnable and onDisable methods on custom events to manually handle a call do disable/enable:
 
+	var isEnabled = true;
 	Element.defineCustomEvent('myCustomEvent', {
 
 		base: 'touchstart'
 
-		cancelable: true
+		condition: function(){
+			return isEnabled;
+		},
+
+		onEnable: function(){
+			isEnabled = true;
+		}
+
+		onDisable: function(){
+			isEnabled = false;
+		}
 
 	});

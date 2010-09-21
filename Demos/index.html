@@ -30,18 +30,25 @@
 		});
 
 
+		var isEnabled = true;
 		Element.defineCustomEvent('control+alt', {
 
 			base: 'control',
-
-			cancelable: true,
 			
 			condition: function(event){
-				return !!event.alt;
+				return isEnabled && !!event.alt;
 			},
 
 			onSetup: function(fn, name){
 				console.log('-setup: ' + name);
+			},
+
+			onEnable: function(){console.log('yo');
+				isEnabled = true;
+			},
+
+			onDisable: function(){
+				isEnabled = false;
 			}
 
 		});
