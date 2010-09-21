@@ -34,6 +34,8 @@
 
 			base: 'control',
 
+			cancelable: true,
+			
 			condition: function(event){
 				return !!event.alt;
 			},
@@ -106,12 +108,31 @@
 			console.log('~firing: shift');
 		});
 
+		window.addEvent('load', function(){
+			var toggle = document.id('toggleEvents');
+
+			var text = ['Disable control+alt', 'Enable control+alt'];
+
+			var disable = function(){
+				Element.disableCustomEvents();
+				this.set('text', text[1]).removeEvent('click', disable).addEvent('click', enable);
+			};
+
+			var enable = function(){
+				Element.enableCustomEvents();
+				this.set('text', text[0]).removeEvent('click', enable).addEvent('click', disable);
+			};
+
+			enable.call(toggle);
+		});
+
 		})();
 	</script>
 </head>
 <body>
 <div>
-	Open your console (Firebug, Web Inspector, ...) and press either alt+control, alt+control+shift or shift to see some fancy output.
+	<div>Open your console (Firebug, Web Inspector, ...) and press either alt+control, alt+control+shift or shift to see some fancy output.</div>
+	<button id="toggleEvents"></button>
 </div>
 </body>
 </html>

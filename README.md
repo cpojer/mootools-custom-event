@@ -88,3 +88,23 @@ There is also a new "hasEvent" method on Element to check whether an element has
 
 	if (myElement.hasEvent('click')) // this element has click events associated with it
 
+Enable / Disable Custom Events
+------------------------------
+
+To disable or enable certain custom events global you can use
+
+	Element.disableCustomEvents();
+
+To enable them again you can use
+
+	Element.enableCustomEvents();
+
+There is a 'cancelable'-flag that you can set on custom events to make it possible to disable them:
+
+	Element.defineCustomEvent('myCustomEvent', {
+
+		base: 'touchstart'
+
+		cancelable: true
+
+	});
