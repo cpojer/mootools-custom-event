@@ -3,17 +3,22 @@ Custom Event
 
 Allows to create custom events based on other custom events. Requires MooTools Core 1.3.
 
+This Plugin is part of MooTools [PowerTools!](http://cpojer.net/PowerTools).
+
+* [Build PowerTools!](http://cpojer.net/PowerTools)
+* [Fork PowerTools!](https://github.com/cpojer/PowerTools)
+
 Build
 -----
 
 Build via [Packager](http://github.com/kamicane/packager), requires [MooTools Core](http://github.com/mootools/mootools-core) to be registered to Packager already
 
-	./packager register /path/to/custom-event
-	./packager build Custom-Event/* > custom-event.js
+	packager register /path/to/custom-event
+	packager build Custom-Event/* > custom-event.js
 
 To build this plugin without external dependencies use
 
-	./packager build Custom-Event/* +use-only Custom-Event > custom-event.js
+	packager build Custom-Event/* +use-only Custom-Event > custom-event.js
 
 Demo
 ----
